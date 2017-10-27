@@ -1,4 +1,4 @@
-function deleteTask(params, input) {
+function deleteTask(channel_name, input) {
   if (!isNaN(input)) {
     var spreadsheet_id = PropertiesService.getScriptProperties().getProperty('SPREAD_SHEET_ID');
     var sheets = SpreadsheetApp.openById(spreadsheet_id);
@@ -32,11 +32,11 @@ function deleteTask(params, input) {
       var lastRowRange = todoSheet.getRange(a1Notation);
       lastRowRange.clearContent();
       
-      postSimpleMessage(params.channel_name, ":tada: *Task deleted successfully* :tada:");
+      postSimpleMessage(channel_name, ":tada: *Đã xóa task thành công* :tada:");
     } else {
-      postSimpleMessage(params.channel_name, ":rage: *Input ID is not existed*\n _Type [ /todo help ] for details._");
+      postSimpleMessage(channel_name, ":rage: *ID đã nhập không tồn tại*\n _Gõ [ /todo help ] để xem hướng dẫn._");
     }
   } else {
-    postSimpleMessage(params.channel_name, ":rage: *Input ID is not a number*\n _Type [ /todo help ] for details._");
+    postSimpleMessage(channel_name, ":rage: *ID đã nhập không phải số*\n _Gõ [ /todo help ] để xem hướng dẫn._");
   }
 }
