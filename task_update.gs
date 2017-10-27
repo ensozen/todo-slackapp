@@ -1,4 +1,4 @@
-function updateTask(params, input) {
+function updateTask(channel_name, user_name, input) {
   var parts = input.split("#");
   if (parts.length == 2) {
     var spreadsheet_id = PropertiesService.getScriptProperties().getProperty('SPREAD_SHEET_ID');
@@ -8,7 +8,6 @@ function updateTask(params, input) {
     var a1Notation = 'A2:J' + lastRow.toString();
     var taskRange = todoSheet.getRange(a1Notation);
     var taskLen = taskRange.getNumRows();
-    var user = params.user_name.toString();
     
     if (!isNaN(parts[0])) {
       var inputId = parseInt(parts[0]);
@@ -21,22 +20,22 @@ function updateTask(params, input) {
         var status = ["Active", "Done", "Cancel"];
         if (status.indexOf(parts[1]) != -1) {
           var currentTime = moment().format("YYYY/MM/DD HH:mm:ss");
-          taskRange.getCell(i,5).setValue(params.user_name);
+          taskRange.getCell(i,5).setValue(user_name);
           taskRange.getCell(i,6).setValue(currentTime);
           taskRange.getCell(i,10).setValue(parts[1]);
-          postSimpleMessage(params.channel_name, ":tada: *Task status updated successfully* :tada:");
+          postSimpleMessage(channel_name, ":tada: *Đã cập nhật trạng thái của task thành công* :tada:");
         } else {
-          postSimpleMessage(params.channel_name, ":rage: *Input status is not invalid*\n _Type [ /todo help ] for details._");
+          postSimpleMessage(channel_name, ":rage: *Trạng thái đã nhập không hợp lệ*\n _Gõ [ /todo help ] để xem hướng dẫn._");
         }
       }
       else {
-        postSimpleMessage(params.channel_name, ":rage: *Input ID is not existed*\n _Type [ /todo help ] for details._");
+        postSimpleMessage(channel_name, ":rage: *ID đã nhập không tồn tại*\n _Gõ [ /todo help ] để xem hướng dẫn._");
       }
     } else {
-      postSimpleMessage(params.channel_name, ":rage: *Input ID is not a number*\n _Type [ /todo help ] for details._");
+      postSimpleMessage(channel_name, ":rage: *ID đã nhập không phải số*\n _Gõ [ /todo help ] để xem hướng dẫn._");
     }
   }
   else {
-    postSimpleMessage(params.channel_name, ":rage: *Invalid syntax*\n _Type [ /todo help ] for details._");
+    postSimpleMessage(channel_name, ":rage: *Cú pháp câu lệnh không hợp lệ*\n _Gõ [ /todo help ] để xem hướng dẫn._");
   }
 }
