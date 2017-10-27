@@ -1,4 +1,4 @@
-function help(params) {
+function help(channel_name) {
   var helpText = "```\n=============================\n";
   helpText += "/todo [action] [input]\n";
   helpText += "=============================\n";
@@ -26,6 +26,5 @@ function help(params) {
   helpText += "   -> input: None\n";
   helpText += "   -> Ex: /todo help\n";
   helpText += "=============================\n```";
-  postSimpleMessage(params.channel_name, helpText);
+  postSimpleMessage(channel_name, helpText);
 }
-
