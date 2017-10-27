@@ -23,18 +23,18 @@ function doPost(request) {
   
   if (params.token.toString() == appToken && subCommand.indexOf(action) != -1) { 
     if (action == 'list') {
-      postTaskList();
+      postTaskList(params.channel_name);
     } else if (action == 'add') {
       //todo add Đọc sách kỹ thuật#enso, kyo#2017/11/10#http://www.google.com
-      addTask(params, input);
+      addTask(params.channel_name, params.user_name, input);
     } else if (action == 'update' ) {
       //todo update 1#Done
-      updateTask(params, input);
+      updateTask(params.channel_name, params.user_name, input);
     } else if (action == 'delete' ) {
       //todo delete 4
-      deleteTask(params, input)
+      deleteTask(params.channel_name, input)
     } else {
-      help(params);
+      help(params.channel_name);
     }
   }
   return ContentService.createTextOutput().setMimeType(ContentService.MimeType.JSON);
