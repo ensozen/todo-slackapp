@@ -1,4 +1,4 @@
-function postTaskList() {
+function postTaskList(channel_name) {
   var spreadsheet_id = PropertiesService.getScriptProperties().getProperty('SPREAD_SHEET_ID');
   var dueTimeIcon = PropertiesService.getScriptProperties().getProperty('DUE_TIME_ICON_LINK');
   var sheets = SpreadsheetApp.openById(spreadsheet_id);
@@ -44,5 +44,11 @@ function postTaskList() {
     }
     taskList.push(task);
   }
-  postMessageWithAttachments("todo", taskList);
+   
+  if (taskList.length > 0) postMessageWithAttachments(channel_name, taskList);
+  else postSimpleMessage(channel_name, ":yum: *May quá, không có task nào cả* :yum:");
+}
+
+function postTaskListToChannelTodo() {
+  postTaskList("todo");
 }
